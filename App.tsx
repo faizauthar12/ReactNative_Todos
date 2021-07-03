@@ -14,9 +14,8 @@ function MyStack() {
   return (
     <RootStack.Navigator
         initialRouteName="Home"
-        screenOptions={{ cardStyle: { backgroundColor: '#fff' } }}
     >
-      <RootStack.Screen name="Home" component={HomeScreen} />
+      <RootStack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
     </RootStack.Navigator>
   );
 }
