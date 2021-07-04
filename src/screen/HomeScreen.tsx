@@ -7,7 +7,26 @@ import TodoItem from "../components/TodoItem";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
+export interface IsTodo {
+    index: number,
+    item: String,
+}
+
 const HomeScreen = () => {
+    const [todo, setTodo] = useState();
+    const [todoItems, setTodoItems] = useState([]);
+
+    const handleAddTodo = () => {
+        setTodoItems([...todoItems, todo])
+        setTodo(null);
+    }
+    
+    const completeTodo = (index) => {
+        let itemsCopy = [...todoItems];
+        itemsCopy.splice(index, 1);
+        setTodoItems(itemsCopy)
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -16,30 +35,30 @@ const HomeScreen = () => {
             </View>
 
             <ScrollView style={styles.listStyle}>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
+                {
+                    todoItems.map((item, index) => {
+                        return(
+                            <TouchableOpacity style={styles.itemStyle} key={index} onPress={() => completeTodo(index)}>
+                                <TodoItem desc={item}/>
+                            </TouchableOpacity>
+                        )
+                    })
+                }
             </ScrollView>
 
             <View style={styles.bottomNavbar}>
                 <View style={styles.bottomContainer}>
-                    <TextInput style={styles.InputStyle}>
-
+                    <TextInput 
+                        style={styles.InputStyle}
+                        placeholder={"Tulis pekerjaanmu"}
+                        value={todo}
+                        onChangeText={text => setTodo(text)}
+                    >
                     </TextInput>
 
                     <TouchableOpacity
                         style={styles.Button}
-                        onPress={() => {}}
+                        onPress={() => handleAddTodo()}
                     >
                         <Text style={styles.text}>Tambah</Text>
                     </TouchableOpacity>
@@ -86,7 +105,15 @@ const styles = StyleSheet.create({
     },
     text: {
         padding: 10
-    }
+    },
+    itemStyle: {
+        borderRadius: 10,
+        shadowRadius: 1,
+        padding: 25,
+        backgroundColor: "#fff",
+        flexDirection: "column",
+        justifyContent: "space-between",
+    },
 });
 
 export default HomeScreen;
