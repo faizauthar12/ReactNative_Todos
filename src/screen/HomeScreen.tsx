@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions } from "react-native";
+import { StyleSheet, View, SafeAreaView, FlatList, Dimensions } from "react-native";
 
 import TodoListText from "../components/TodoListText";
 import TodoItem from "../components/TodoItem";
 import BottomNavbar from "../components/BottomNavbar";
+
+import TodoData from "../data/TodoData";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,21 +18,18 @@ const HomeScreen = () => {
                 <TodoListText/>
             </View>
 
-            <ScrollView style={styles.listStyle}>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-            </ScrollView>
+            <FlatList
+                style={styles.listStyle}
+
+                data={TodoData}
+                keyExtractor={TodoData => TodoData.id}
+
+                renderItem={({ item }) => {
+                    return(
+                        <TodoItem desc={item.desc}/>
+                    )
+                }}
+            />
 
             <View style={styles.bottomNavbar}>
                     <BottomNavbar/>
