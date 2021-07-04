@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         flex: 2,
         flexGrow: 4,
         borderRadius: 10,
-        borderWidth: 1
+        borderWidth: 1,
+        color: "black"
     },
     Button: {
         flex: 1,
