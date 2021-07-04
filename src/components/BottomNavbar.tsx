@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         flexGrow: 4,
         borderRadius: 10,
         borderWidth: 1,
-        color: "black"
+        color: "black",
+        paddingStart: 15
     },
     Button: {
         flex: 1,
