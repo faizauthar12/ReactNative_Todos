@@ -4,6 +4,7 @@ import { StyleSheet, View, SafeAreaView, FlatList, Dimensions, TextInput, Toucha
 import TodoListText from "../components/TodoListText";
 import TodoItem from "../components/TodoItem";
 import BottomNavbar from "../components/BottomNavbar";
+import SearchBar from "../components/SearchBar";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,6 +17,7 @@ const TodoData:String[] = [
 const HomeScreen = () => {
 
     const [todoItems, setTodoItems] = useState(TodoData);
+    const [todoSearch,setTodoSearch] = useState(todoItems);
 
     // Add a new item to the state
     function addTodoItem(_text) {
@@ -29,16 +31,30 @@ const HomeScreen = () => {
         setTodoItems(tempArr)
     }
 
+    function searchItem(_text) {
+       if (_text === null ) {
+           setTodoSearch(todoItems);
+       } else {
+           let tempArr = [...todoItems];
+           let search = tempArr.filter(item => item.includes(_text));
+           setTodoSearch(search)
+           console.log(search);
+       }
+       //console.log(tempArr);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.tasksWrapper}>
                 <TodoListText/>
-                <TextInput style={styles.searchInputStyle}/>
+                <View style={styles.searchBarStyle}>
+                    <SearchBar onPress={searchItem}/>
+                </View>
             </View>
 
             <FlatList
                 style={styles.listStyle}
-                data={todoItems}
+                data={todoSearch}
                 keyExtractor={(item, index) => index.toString()}
 
                 renderItem={({ item, index }) => {
@@ -87,14 +103,9 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "space-between",
     },
-    searchInputStyle:{
-        borderRadius: 10,
-        borderWidth: 1,
-        color: "black",
+    searchBarStyle:{
         marginTop: 10,
-        marginHorizontal: 15,
-        paddingHorizontal: 20,
-        backgroundColor: "#fff",
+        marginHorizontal: 30,
     }
 });
 
