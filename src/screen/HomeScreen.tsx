@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions } from "react-native";
+import { StyleSheet, View, SafeAreaView, FlatList, Dimensions, TextInput, TouchableOpacity, Text } from "react-native";
 
 import TodoListText from "../components/TodoListText";
 import TodoItem from "../components/TodoItem";
@@ -8,7 +8,14 @@ import BottomNavbar from "../components/BottomNavbar";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+const TodoData:String[] = [
+    "Buy something",
+    "Buy buy"
+];
+
 const HomeScreen = () => {
+
+    const [todoItems, setTodoItems] = useState(TodoData);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -16,24 +23,22 @@ const HomeScreen = () => {
                 <TodoListText/>
             </View>
 
-            <ScrollView style={styles.listStyle}>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-            </ScrollView>
+            <FlatList
+                style={styles.listStyle}
+                data={todoItems}
+                keyExtractor={(item, index) => index.toString()}
+
+                renderItem={({ item, index }) => {
+                    return(
+                        <TouchableOpacity style={styles.itemStyle}>
+                            <TodoItem desc={item}/>
+                        </TouchableOpacity>
+                    )
+                }}
+            />
 
             <View style={styles.bottomNavbar}>
-                    <BottomNavbar/>
+                <BottomNavbar/>
             </View>
         </SafeAreaView>
     );
@@ -57,6 +62,14 @@ const styles = StyleSheet.create({
         width: windowWidth,
         height: windowHeight * 0.1,
         backgroundColor: "#fff",
+    },
+    itemStyle: {
+        borderRadius: 10,
+        shadowRadius: 1,
+        padding: 25,
+        backgroundColor: "#fff",
+        flexDirection: "column",
+        justifyContent: "space-between",
     },
 });
 

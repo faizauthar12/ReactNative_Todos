@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 
-const BottomNavbar = () => {
+const BottomNavbar = (props) => {
     return (
         <View style={styles.container}>
             <TextInput style={styles.InputStyle}>

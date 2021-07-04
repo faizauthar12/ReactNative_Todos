@@ -3,9 +3,9 @@ export interface IsDummies {
     desc: string,
 }
 
-const TodoDummies = [];
+const TodoDummies:IsDummies[] = [];
 
-for(let i=1; i<11; i++) {
+for(let i=0; i<3; i++) {
     TodoDummies.push(
         {
             id: i,
