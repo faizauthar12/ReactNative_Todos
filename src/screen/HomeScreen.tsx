@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
     StyleSheet,
     View,
@@ -16,6 +16,13 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const HomeScreen = () => {
+    const [task, setTask] = useState();
+    const [taskItems, setTaskItems] = useState([]);
+
+    const AddTask = () => {
+        setTaskItems([...taskItems, task])
+        setTask(null);
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -23,32 +30,25 @@ const HomeScreen = () => {
                 <Text style={styles.textHeader}>Todo List</Text>
             </View>
 
-            <FlatList
-                style={styles.listStyle}
-
-                data={TodoData}
-                keyExtractor={TodoData => TodoData.id}
-
-                renderItem={({ item }) => {
-                    return(
-                        <TouchableOpacity style={styles.itemStyle}>
-                            <Text numberOfLines={1} style={styles.textItem}>{item.desc}</Text>
-                        </TouchableOpacity>
-                    )
-                }}
-            />
+            <View>
+                <TouchableOpacity style={styles.itemStyle}>
+                    <Text numberOfLines={1} style={styles.textItem}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel doloribus repellat magnam ipsa animi, consectetur iure fugit explicabo, nisi ullam similique cumque tenetur illum magni? Dolore doloribus aspernatur optio cupiditate.</Text>
+                </TouchableOpacity>
+            </View>
 
             <View style={styles.bottomNavbar}>
                 <TextInput 
                     style={styles.InputAddStyle}
                     placeholder={"Tuliskan pekerjaanmu"}
+                    value={task}
+                    onChangeText={text => setTask(text)}
                 >
 
                 </TextInput>
 
                 <TouchableOpacity
                     style={styles.Button}
-                    onPress={() => {}}
+                    onPress={() => AddTask()}
                 >
                     <Text style={styles.textButton}>Tambah</Text>
                 </TouchableOpacity>
