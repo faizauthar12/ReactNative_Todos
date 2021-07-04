@@ -1,7 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const TodoItem = ({ desc }) => {
+interface Props {
+    desc: String,
+}
+
+const TodoItem: FC<Props> = ({ desc }) => {
     return (
         <TouchableOpacity style={styles.itemStyle}>
             <Text numberOfLines={1} style={styles.textStyle}>{desc}</Text>
