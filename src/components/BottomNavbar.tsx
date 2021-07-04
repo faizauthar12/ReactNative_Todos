@@ -14,7 +14,10 @@ const BottomNavbar = ({ onPress }) => {
 
             <TouchableOpacity
                 style={styles.Button}
-                onPress={() => onPress(text)}
+                onPress={() => {
+                    onPress(text);
+                    setText(null);
+                }}
             >
                 <Text style={styles.text}>Tambah</Text>
             </TouchableOpacity>
