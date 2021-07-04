@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions } from "react-native";
+import { StyleSheet, View, SafeAreaView, ScrollView, Dimensions, TextInput, TouchableOpacity, Text } from "react-native";
 
 import TodoListText from "../components/TodoListText";
 import TodoItem from "../components/TodoItem";
-import BottomNavbar from "../components/BottomNavbar";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -33,7 +32,18 @@ const HomeScreen = () => {
             </ScrollView>
 
             <View style={styles.bottomNavbar}>
-                    <BottomNavbar/>
+                <View style={styles.bottomContainer}>
+                    <TextInput style={styles.InputStyle}>
+
+                    </TextInput>
+
+                    <TouchableOpacity
+                        style={styles.Button}
+                        onPress={() => {}}
+                    >
+                        <Text style={styles.text}>Tambah</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -58,6 +68,25 @@ const styles = StyleSheet.create({
         height: windowHeight * 0.1,
         backgroundColor: "#fff",
     },
+    bottomContainer: {
+        flexDirection: "row",
+    },
+    InputStyle: {
+        flex: 2,
+        flexGrow: 4,
+        borderRadius: 10,
+        borderWidth: 1
+    },
+    Button: {
+        flex: 1,
+        borderRadius: 10,
+        marginStart: 10,
+        justifyContent: "center",
+        backgroundColor: "#00D1FF"
+    },
+    text: {
+        padding: 10
+    }
 });
 
 export default HomeScreen;
