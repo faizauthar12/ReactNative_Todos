@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 
-const BottomNavbar = (props) => {
+const BottomNavbar = ({ onPress }) => {
+    const [text, setText] = useState(null);
+
     return (
         <View style={styles.container}>
-            <TextInput style={styles.InputStyle}>
-
-            </TextInput>
+            <TextInput
+                style={styles.InputStyle}
+                onChangeText={text => setText(text)}
+                value={text}
+            />
 
             <TouchableOpacity
                 style={styles.Button}
-                onPress={() => {}}
+                onPress={() => onPress(text)}
             >
                 <Text style={styles.text}>Tambah</Text>
             </TouchableOpacity>

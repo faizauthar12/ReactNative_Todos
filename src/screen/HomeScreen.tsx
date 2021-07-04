@@ -17,6 +17,11 @@ const HomeScreen = () => {
 
     const [todoItems, setTodoItems] = useState(TodoData);
 
+    // Add a new item to the state
+    function addTodoItem(_text) {
+        setTodoItems([...todoItems, _text]);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.tasksWrapper}>
@@ -38,7 +43,7 @@ const HomeScreen = () => {
             />
 
             <View style={styles.bottomNavbar}>
-                <BottomNavbar/>
+                <BottomNavbar onPress={addTodoItem}/>
             </View>
         </SafeAreaView>
     );
