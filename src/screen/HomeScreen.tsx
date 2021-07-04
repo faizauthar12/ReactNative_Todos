@@ -22,6 +22,13 @@ const HomeScreen = () => {
         setTodoItems([...todoItems, _text]);
     }
 
+    // Function to delete an item from our array using the index
+    function completeTodoItem(_index){
+        let tempArr = [...todoItems];
+        tempArr.splice(_index, 1);
+        setTodoItems(tempArr)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.tasksWrapper}>
@@ -35,7 +42,10 @@ const HomeScreen = () => {
 
                 renderItem={({ item, index }) => {
                     return(
-                        <TouchableOpacity style={styles.itemStyle}>
+                        <TouchableOpacity
+                            style={styles.itemStyle}
+                            onPress={() => {completeTodoItem(index);}}
+                        >
                             <TodoItem desc={item}/>
                         </TouchableOpacity>
                     )
