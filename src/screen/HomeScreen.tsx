@@ -33,6 +33,7 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.tasksWrapper}>
                 <TodoListText/>
+                <TextInput style={styles.searchInputStyle}/>
             </View>
 
             <FlatList
@@ -86,6 +87,15 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "space-between",
     },
+    searchInputStyle:{
+        borderRadius: 10,
+        borderWidth: 1,
+        color: "black",
+        marginTop: 10,
+        marginHorizontal: 15,
+        paddingHorizontal: 20,
+        backgroundColor: "#fff",
+    }
 });
 
 export default HomeScreen;
