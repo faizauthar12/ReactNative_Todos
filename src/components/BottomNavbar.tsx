@@ -21,9 +21,13 @@ const BottomNavbar = ({ onPress }) => {
             <TouchableOpacity
                 style={styles.Button}
                 onPress={() => {
-                    onPress(text);
-                    setText(null);
-                    KBDismiss();
+                    if(text != null) {
+                        onPress(text);
+                        setText(null);
+                        KBDismiss();
+                    } else {
+                        console.log("TextInput pada BottomNavbar belum di isi")
+                    }
                 }}
             >
                 <Text style={styles.text}>Tambah</Text>
