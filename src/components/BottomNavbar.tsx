@@ -15,6 +15,7 @@ const BottomNavbar = ({ onPress }) => {
                 style={styles.InputStyle}
                 onChangeText={text => setText(text)}
                 value={text}
+                placeholder={"Apa yang akan kamu lakukan hari ini?"}
             />
 
             <TouchableOpacity

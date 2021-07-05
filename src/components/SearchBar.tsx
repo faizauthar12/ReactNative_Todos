@@ -13,6 +13,7 @@ const SearchBar = ({ onChangeText }) => {
                     onChangeText(text);
                 }}
                 value={text}
+                placeholder={"Cari hal yang akan kamu lakukan"}
             />
         </View>
     );
