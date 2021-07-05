@@ -20,18 +20,18 @@ const HomeScreen = () => {
     const [todoSearch,setTodoSearch] = useState(todoItems);
 
     // Add a new item to the state
-    function addTodoItem(_text) {
+    function addTodoItem(_text:string) {
         setTodoItems([...todoItems, _text]);
     }
 
     // Function to delete an item from our array using the index
-    function completeTodoItem(_index){
+    function completeTodoItem(_index:number){
         let tempArr = [...todoItems];
         tempArr.splice(_index, 1);
-        setTodoItems(tempArr)
+        setTodoItems(tempArr);
     }
 
-    function searchItem(_text) {
+    function searchItem(_text:string) {
        if (_text === null ) {
            setTodoSearch(todoItems);
        } else {
