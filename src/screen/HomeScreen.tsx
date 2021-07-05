@@ -13,13 +13,12 @@ const TodoData:string[] = [
 
 const HomeScreen = () => {
 
-    const [todoItems, setTodoItems] = useState(TodoData);
-    const [todoSearch,setTodoSearch] = useState(todoItems);
+    const [todoItems, setTodoItems] = useState(TodoData)
+    const [search, setSearch] = useState("")
 
     // Add a new item to the state
     function addTodoItem(_text:string) {
         setTodoItems([...todoItems, _text]);
-        setTodoSearch([...todoItems, _text]);
     }
 
     // Function to delete an item from our array using the index
@@ -27,39 +26,25 @@ const HomeScreen = () => {
         let tempArr = [...todoItems];
         tempArr.splice(_index, 1);
         setTodoItems(tempArr);
-        setTodoSearch(tempArr);
     }
 
-    function searchItem(_text:string) {
-       if (_text === null ) {
-           setTodoSearch(todoItems);
-       } else {
-           let tempArr = [...todoItems];
-           let search = tempArr.filter(item => item.toLowerCase().includes(_text.toLowerCase()));
-           setTodoSearch(search)
-           //console.log(tempArr);
-           //console.log(search);
-       }
-    }
-
+    // TODO: Title, description, button delete, timestamp
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <TodoListText/>
 
-                <SearchBar onChangeText={searchItem}/>
+                <SearchBar onChangeText={setSearch}/>
             </View>
 
             <FlatList
                 style={styles.listStyle}
-                data={todoSearch}
+                data={todoItems.filter(item => item.toLowerCase().includes(search.toLowerCase()))}
                 keyExtractor={(index) => index.toString()}
 
-                renderItem={({ item, index }) => {
-                    return(
+                renderItem={({ item, index }) =>
                         <TodoItem data={item} id={index} onPress={completeTodoItem}/>
-                    )
-                }}
+                }
             />
 
             <BottomNavbar onPress={addTodoItem}/>

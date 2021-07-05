@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TextInput } from "react-native";
+import React from "react";
+import { StyleSheet, View, TextInput, TextInputProps } from "react-native";
 
-const SearchBar = ({ onChangeText }) => {
-    const [text, setText] = useState(null);
+export interface SearchBarProps extends TextInputProps{}
+
+const SearchBar = ({autoCorrect=false,autoCapitalize="none",placeholder="Cari hal yang akan kamu lakukan",style,...props }:SearchBarProps) => {
 
     return (
         <View style={styles.container}>
             <TextInput
-                style={styles.InputStyle}
-                onChangeText={text => {
-                    setText(text);
-                    onChangeText(text);
-                }}
-                value={text}
-                placeholder={"Cari hal yang akan kamu lakukan"}
-                autoCorrect={false}
-                autoCapitalize={"none"}
+                {...props}
+                style={StyleSheet.flatten([styles.inputStyle,style])}
+                placeholder={placeholder}
+                autoCorrect={autoCorrect}
+                autoCapitalize={autoCapitalize}
             />
         </View>
     );
@@ -27,7 +24,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginHorizontal: 30,
     },
-    InputStyle: {
+    inputStyle: {
         flex: 2,
         flexGrow: 4,
         borderRadius: 10,
