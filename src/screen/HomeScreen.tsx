@@ -35,7 +35,7 @@ const HomeScreen = () => {
            setTodoSearch(todoItems);
        } else {
            let tempArr = [...todoItems];
-           let search = tempArr.filter(item => item.includes(_text));
+           let search = tempArr.filter(item => item.toLowerCase().includes(_text.toLowerCase()));
            setTodoSearch(search)
            //console.log(tempArr);
            //console.log(search);
