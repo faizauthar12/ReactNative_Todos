@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
+import KBDismiss from "./KBDismiss";
 
 const BottomNavbar = ({ onPress }) => {
     const [text, setText] = useState(null);
@@ -17,6 +18,7 @@ const BottomNavbar = ({ onPress }) => {
                 onPress={() => {
                     onPress(text);
                     setText(null);
+                    KBDismiss();
                 }}
             >
                 <Text style={styles.text}>Tambah</Text>
