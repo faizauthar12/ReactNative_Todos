@@ -6,7 +6,7 @@ import TodoItem from "../components/TodoItem";
 import BottomNavbar from "../components/BottomNavbar";
 import SearchBar from "../components/SearchBar";
 
-const TodoData:String[] = [
+const TodoData:string[] = [
     "Buy something",
     "Buy buy"
 ];
