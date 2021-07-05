@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
 
 import TodoListText from "../components/TodoListText";
 import TodoItem from "../components/TodoItem";
@@ -44,26 +44,20 @@ const HomeScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.tasksWrapper}>
+            <View style={styles.header}>
                 <TodoListText/>
-                <View style={styles.searchBarStyle}>
-                    <SearchBar onChangeText={searchItem}/>
-                </View>
+
+                <SearchBar onChangeText={searchItem}/>
             </View>
 
             <FlatList
                 style={styles.listStyle}
                 data={todoSearch}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(index) => index.toString()}
 
                 renderItem={({ item, index }) => {
                     return(
-                        <TouchableOpacity
-                            style={styles.itemStyle}
-                            onPress={() => {completeTodoItem(index);}}
-                        >
-                            <TodoItem desc={item}/>
-                        </TouchableOpacity>
+                        <TodoItem data={item} id={index} onPress={completeTodoItem}/>
                     )
                 }}
             />
@@ -77,26 +71,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    tasksWrapper: {
+    header: {
         paddingTop: 40,
         marginBottom: 20,
     },
     listStyle: {
         flex: 2,
         paddingHorizontal: 26,
-    },
-    itemStyle: {
-        borderRadius: 10,
-        shadowRadius: 1,
-        padding: 25,
-        backgroundColor: "#fff",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        marginBottom: 5,
-    },
-    searchBarStyle:{
-        marginTop: 10,
-        marginHorizontal: 30,
     }
 });
 

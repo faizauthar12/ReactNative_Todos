@@ -22,6 +22,8 @@ const SearchBar = ({ onChangeText }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        marginTop: 10,
+        marginHorizontal: 30,
     },
     InputStyle: {
         flex: 2,
