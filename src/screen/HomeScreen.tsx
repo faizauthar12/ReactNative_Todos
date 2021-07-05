@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView, FlatList, Dimensions, TextInput, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 
 import TodoListText from "../components/TodoListText";
 import TodoItem from "../components/TodoItem";
