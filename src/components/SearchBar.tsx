@@ -1,26 +1,19 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 
-const SearchBar = ({ onPress }) => {
+const SearchBar = ({ onChangeText }) => {
     const [text, setText] = useState(null);
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={styles.InputStyle}
-                onChangeText={text => setText(text)}
+                onChangeText={text => {
+                    setText(text);
+                    onChangeText(text);
+                }}
                 value={text}
             />
-
-            <TouchableOpacity
-                style={styles.Button}
-                onPress={() => {
-                    onPress(text);
-                    setText(null);
-                }}
-            >
-                <Text style={styles.text}>Cari</Text>
-            </TouchableOpacity>
         </View>
     );
 }

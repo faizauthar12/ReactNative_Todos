@@ -50,7 +50,7 @@ const HomeScreen = () => {
             <View style={styles.tasksWrapper}>
                 <TodoListText/>
                 <View style={styles.searchBarStyle}>
-                    <SearchBar onPress={searchItem}/>
+                    <SearchBar onChangeText={searchItem}/>
                 </View>
             </View>
 
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         flexDirection: "column",
         justifyContent: "space-between",
+        marginBottom: 5,
     },
     searchBarStyle:{
         marginTop: 10,
