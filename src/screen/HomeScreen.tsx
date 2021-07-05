@@ -22,6 +22,7 @@ const HomeScreen = () => {
     // Add a new item to the state
     function addTodoItem(_text:string) {
         setTodoItems([...todoItems, _text]);
+        setTodoSearch([...todoItems, _text]);
     }
 
     // Function to delete an item from our array using the index
@@ -29,6 +30,7 @@ const HomeScreen = () => {
         let tempArr = [...todoItems];
         tempArr.splice(_index, 1);
         setTodoItems(tempArr);
+        setTodoSearch(tempArr);
     }
 
     function searchItem(_text:string) {
@@ -38,9 +40,9 @@ const HomeScreen = () => {
            let tempArr = [...todoItems];
            let search = tempArr.filter(item => item.includes(_text));
            setTodoSearch(search)
-           console.log(search);
+           //console.log(tempArr);
+           //console.log(search);
        }
-       //console.log(tempArr);
     }
 
     return (
