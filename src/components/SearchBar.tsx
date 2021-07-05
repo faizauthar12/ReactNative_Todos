@@ -14,6 +14,8 @@ const SearchBar = ({ onChangeText }) => {
                 }}
                 value={text}
                 placeholder={"Cari hal yang akan kamu lakukan"}
+                autoCorrect={false}
+                autoCapitalize={"none"}
             />
         </View>
     );

@@ -16,6 +16,8 @@ const BottomNavbar = ({ onPress }) => {
                 onChangeText={text => setText(text)}
                 value={text}
                 placeholder={"Apa yang akan kamu lakukan hari ini?"}
+                autoCorrect={false}
+                autoCapitalize={"none"}
             />
 
             <TouchableOpacity
