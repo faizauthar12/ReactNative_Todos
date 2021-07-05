@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TextInput, TouchableOpacity, Dimensions } from "react-native";
 import KBDismiss from "./KBDismiss";
+
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const BottomNavbar = ({ onPress }) => {
     const [text, setText] = useState(null);
@@ -30,6 +34,11 @@ const BottomNavbar = ({ onPress }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        padding: 10,
+        bottom: 0,
+        width: windowWidth,
+        height: windowHeight * 0.1,
+        backgroundColor: "#fff",
     },
     InputStyle: {
         flex: 2,

@@ -6,9 +6,6 @@ import TodoItem from "../components/TodoItem";
 import BottomNavbar from "../components/BottomNavbar";
 import SearchBar from "../components/SearchBar";
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
 const TodoData:String[] = [
     "Buy something",
     "Buy buy"
@@ -71,9 +68,7 @@ const HomeScreen = () => {
                 }}
             />
 
-            <View style={styles.bottomNavbar}>
-                <BottomNavbar onPress={addTodoItem}/>
-            </View>
+            <BottomNavbar onPress={addTodoItem}/>
         </SafeAreaView>
     );
 };
@@ -89,13 +84,6 @@ const styles = StyleSheet.create({
     listStyle: {
         flex: 2,
         paddingHorizontal: 26,
-    },
-    bottomNavbar: {
-        padding: 10,
-        bottom: 0,
-        width: windowWidth,
-        height: windowHeight * 0.1,
-        backgroundColor: "#fff",
     },
     itemStyle: {
         borderRadius: 10,
