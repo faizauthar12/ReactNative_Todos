@@ -1,7 +1,7 @@
-import { Keyboard } from "react-native";
+import {Keyboard} from 'react-native';
 
 const KBDismiss = () => {
-    Keyboard.dismiss();
-}
+  Keyboard.dismiss();
+};
 
 export default KBDismiss;
