@@ -25,7 +25,7 @@ const TodoData: IsTodo[] = [
   },
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [todoItems, setTodoItems] = useState(TodoData);
   const [search, setSearch] = useState('');
 
@@ -65,6 +65,7 @@ const HomeScreen = () => {
           <TodoItem
             title={item.title}
             desc={item.desc}
+            navigation={navigation}
             /*id={index} onPress={completeTodoItem}*/
           />
         )}

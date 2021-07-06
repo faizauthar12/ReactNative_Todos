@@ -1,11 +1,13 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, RouteProp} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './src/screen/HomeScreen';
+import DetailScreen from './src/screen/DetailScreen';
 
 type RootStackParamList = {
   Home: undefined;
+  Detail: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -18,6 +20,7 @@ function MyStack() {
         options={{headerShown: false}}
         component={HomeScreen}
       />
+      <RootStack.Screen name={'Detail'} component={DetailScreen} />
     </RootStack.Navigator>
   );
 }
