@@ -4,13 +4,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './src/screen/HomeScreen';
 import DetailScreen from './src/screen/DetailScreen';
+import {AuthParamList} from './src/AuthParamList';
 
-type RootStackParamList = {
-  Home: undefined;
-  Detail: undefined;
-};
-
-const RootStack = createStackNavigator<RootStackParamList>();
+const RootStack = createStackNavigator<AuthParamList>();
 
 function MyStack() {
   return (

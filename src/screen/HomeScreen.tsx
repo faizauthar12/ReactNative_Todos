@@ -6,6 +6,8 @@ import TodoItem from '../components/TodoItem';
 import BottomNavbar from '../components/BottomNavbar';
 import SearchBar from '../components/SearchBar';
 
+import {AuthNavProps} from '../AuthParamList';
+
 export interface IsTodo {
   id: number;
   title: string;
@@ -25,7 +27,7 @@ const TodoData: IsTodo[] = [
   },
 ];
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   const [todoItems, setTodoItems] = useState(TodoData);
   const [search, setSearch] = useState('');
 
