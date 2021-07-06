@@ -36,14 +36,14 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   function addTodoItem(_text: string) {
     setTodoItems([...todoItems, _text]);
   }
+  */
 
-  // Function to delete an item from our array using the index
-  function completeTodoItem(_index: number) {
+  // Function to delete an item from our array.
+  function completeTodoItem(_id: number) {
     let tempArr = [...todoItems];
-    tempArr.splice(_index, 1);
+    tempArr.splice(_id, 1);
     setTodoItems(tempArr);
   }
-  */
 
   // TODO: Title, description, button delete, timestamp
   return (
@@ -63,12 +63,13 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
         */
         data={todoItems}
         keyExtractor={todoItems => todoItems.id}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <TodoItem
             title={item.title}
             desc={item.desc}
             navigation={navigation}
-            /*id={index} onPress={completeTodoItem}*/
+            index={index}
+            onPress={completeTodoItem}
           />
         )}
       />

@@ -5,13 +5,11 @@ export interface TodoItemProps {
   title: string;
   desc: string;
   navigation: any;
-  /*
-  id: number;
+  index: number;
   onPress(id: number): void;
-  */
 }
 
-const TodoItem = ({title, desc, navigation /*id, onPress*/}: TodoItemProps) => {
+const TodoItem = ({title, desc, navigation, index, onPress}: TodoItemProps) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -23,7 +21,7 @@ const TodoItem = ({title, desc, navigation /*id, onPress*/}: TodoItemProps) => {
           {title}
         </Text>
 
-        <TouchableOpacity style={styles.Button}>
+        <TouchableOpacity style={styles.Button} onPress={() => onPress(index)}>
           <Text style={styles.buttonText}>-</Text>
         </TouchableOpacity>
       </View>
