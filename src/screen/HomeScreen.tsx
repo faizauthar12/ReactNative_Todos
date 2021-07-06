@@ -6,12 +6,30 @@ import TodoItem from '../components/TodoItem';
 import BottomNavbar from '../components/BottomNavbar';
 import SearchBar from '../components/SearchBar';
 
-const TodoData: string[] = ['Buy something', 'Buy buy'];
+export interface IsTodo {
+  id: number;
+  title: string;
+  desc: string;
+}
+
+const TodoData: IsTodo[] = [
+  {
+    id: 1,
+    title: 'Pergi kepasar',
+    desc: 'Beli sayuran dan buah',
+  },
+  {
+    id: 2,
+    title: 'Berkebun',
+    desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque ipsam praesentium aspernatur pariatur quos nam sed eius. Beatae rerum ab atque. Impedit eos incidunt rem magnam pariatur cum ratione ex.',
+  },
+];
 
 const HomeScreen = () => {
   const [todoItems, setTodoItems] = useState(TodoData);
   const [search, setSearch] = useState('');
 
+  /*
   // Add a new item to the state
   function addTodoItem(_text: string) {
     setTodoItems([...todoItems, _text]);
@@ -23,6 +41,7 @@ const HomeScreen = () => {
     tempArr.splice(_index, 1);
     setTodoItems(tempArr);
   }
+  */
 
   // TODO: Title, description, button delete, timestamp
   return (
@@ -35,16 +54,24 @@ const HomeScreen = () => {
 
       <FlatList
         style={styles.listStyle}
+        /*
         data={todoItems.filter(item =>
           item.toLowerCase().includes(search.toLowerCase()),
         )}
-        keyExtractor={index => index.toString()}
-        renderItem={({item, index}) => (
-          <TodoItem data={item} id={index} onPress={completeTodoItem} />
+        */
+        data={todoItems}
+        keyExtractor={todoItems => todoItems.id}
+        renderItem={({item}) => (
+          <TodoItem
+            title={item.title}
+            desc={item.desc}
+            /*id={index} onPress={completeTodoItem}*/
+          />
         )}
       />
-
+      {/*
       <BottomNavbar onPress={addTodoItem} />
+      */}
     </SafeAreaView>
   );
 };

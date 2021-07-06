@@ -1,38 +1,66 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 export interface TodoItemProps {
-  data: string;
+  title: string;
+  desc: string;
+  /*
   id: number;
   onPress(id: number): void;
+  */
 }
 
-const TodoItem = ({data, id, onPress}: TodoItemProps) => {
+const TodoItem = ({title, desc /*id, onPress*/}: TodoItemProps) => {
   return (
-    <TouchableOpacity
-      style={styles.itemStyle}
-      onPress={() => {
-        onPress(id);
-      }}>
-      <Text numberOfLines={1} style={styles.textStyle}>
-        {data}
+    <View style={styles.container}>
+      <View style={styles.firstLine}>
+        <Text numberOfLines={1} style={styles.textTitle}>
+          {title}
+        </Text>
+
+        <TouchableOpacity style={styles.Button}>
+          <Text style={styles.buttonText}>-</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text numberOfLines={2} style={styles.textDesc}>
+        {desc}
       </Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  textStyle: {
-    fontSize: 20,
-  },
-  itemStyle: {
+  container: {
     borderRadius: 10,
     shadowRadius: 1,
     padding: 25,
     backgroundColor: '#fff',
-    flexDirection: 'column',
     justifyContent: 'space-between',
     marginBottom: 5,
+  },
+  firstLine: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  textTitle: {
+    flex: 2,
+    flexGrow: 10,
+    fontSize: 20,
+  },
+  textDesc: {
+    marginTop: 5,
+    fontWeight: '100',
+  },
+  Button: {
+    flex: 1,
+    borderRadius: 10,
+    marginStart: 10,
+    justifyContent: 'center',
+    backgroundColor: '#00D1FF',
+  },
+  buttonText: {
+    paddingHorizontal: 10,
   },
 });
 
