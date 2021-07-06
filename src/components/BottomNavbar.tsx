@@ -6,14 +6,24 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
+  TextInputProps,
 } from 'react-native';
 import KBDismiss from './KBDismiss';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const BottomNavbar = ({onPress}) => {
-  const [text, setText] = useState(null);
+export interface BottomNavbarProps extends TextInputProps {
+  onPress(text: string): void;
+}
+
+const BottomNavbar = ({
+  autoCorrect = false,
+  autoCapitalize = 'none',
+  placeholder = 'Apa yang akan kamu lakukan hari ini?',
+  onPress,
+}: BottomNavbarProps) => {
+  const [text, setText] = useState('');
 
   return (
     <View style={styles.container}>
@@ -21,17 +31,17 @@ const BottomNavbar = ({onPress}) => {
         style={styles.InputStyle}
         onChangeText={text => setText(text)}
         value={text}
-        placeholder={'Apa yang akan kamu lakukan hari ini?'}
-        autoCorrect={false}
-        autoCapitalize={'none'}
+        placeholder={placeholder}
+        autoCorrect={autoCorrect}
+        autoCapitalize={autoCapitalize}
       />
 
       <TouchableOpacity
         style={styles.Button}
         onPress={() => {
-          if (text != null) {
+          if (text != '') {
             onPress(text);
-            setText(null);
+            setText('');
             KBDismiss();
           } else {
             console.log('TextInput pada BottomNavbar belum di isi');
