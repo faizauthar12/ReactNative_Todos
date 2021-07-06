@@ -1,14 +1,28 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
-const DetailScreen = () => {
+const DetailScreen = ({route}) => {
+  const {title, desc} = route.params;
+
   return (
-    <View>
-      <Text>Detail Screen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.textTitle}>{title}</Text>
+      <Text style={styles.textDesc}>{desc}</Text>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 30,
+    marginHorizontal: 30,
+  },
+  textTitle: {
+    fontSize: 20,
+  },
+  textDesc: {
+    marginTop: 10,
+  },
+});
 
 export default DetailScreen;

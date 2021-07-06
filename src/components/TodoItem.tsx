@@ -16,7 +16,7 @@ const TodoItem = ({title, desc, navigation /*id, onPress*/}: TodoItemProps) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        navigation.navigate('Detail');
+        navigation.navigate('Detail', {title: title, desc: desc});
       }}>
       <View style={styles.firstLine}>
         <Text numberOfLines={1} style={styles.textTitle}>
