@@ -76,7 +76,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
         data={todoItems.filter(item =>
           item.title.toLowerCase().includes(search.toLowerCase()),
         )}
-        keyExtractor={todoItems => todoItems.id}
+        keyExtractor={todoItems => todoItems.id.toString()}
         renderItem={({item, index}) => (
           <TodoItem
             title={item.title}
