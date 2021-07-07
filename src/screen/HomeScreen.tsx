@@ -1,12 +1,23 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, SafeAreaView, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  FlatList,
+  Modal,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  TextInput,
+} from 'react-native';
 
 import TodoListText from '../components/TodoListText';
 import TodoItem from '../components/TodoItem';
-import BottomNavbar from '../components/BottomNavbar';
 import SearchBar from '../components/SearchBar';
 
 import {AuthNavProps} from '../AuthParamList';
+
+const windowHeight = Dimensions.get('window').height;
 
 export interface IsTodo {
   id: number;
@@ -30,6 +41,7 @@ const TodoData: IsTodo[] = [
 const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   const [todoItems, setTodoItems] = useState(TodoData);
   const [search, setSearch] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   /*
   // Add a new item to the state
@@ -75,7 +87,50 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
           />
         )}
       />
-      <BottomNavbar onModalPress={console.log} />
+
+      <View style={styles.bottomContainer}>
+        <TouchableOpacity
+          style={styles.buttonAdd}
+          onPress={() => {
+            setModalVisible(true);
+          }}>
+          <Text style={styles.text}>Tambah Pekerjaan</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Modal animationType="slide" visible={modalVisible}>
+        <View style={{marginTop: 40, flex: 1}}>
+          <Text style={{textAlign: 'center', fontSize: 30}}>
+            Menambahkan todo
+          </Text>
+
+          <View
+            style={{
+              flex: 2,
+              flexGrow: 10,
+              marginTop: 10,
+              marginHorizontal: 30,
+            }}>
+            <TextInput placeholder={'Judul dari pekerjaanmu'}></TextInput>
+            <TextInput
+              placeholder={'Deskripsikan pekerjaanmu'}
+              multiline></TextInput>
+          </View>
+
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              style={[styles.modalButton, {backgroundColor: '#FF4747'}]}
+              onPress={() => setModalVisible(false)}>
+              <Text style={styles.text}>Tutup modal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.modalButton, {backgroundColor: '#00D1FF'}]}
+              onPress={() => {}}>
+              <Text style={styles.text}>Tambah Todo</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -91,6 +146,32 @@ const styles = StyleSheet.create({
   listStyle: {
     flex: 2,
     paddingHorizontal: 26,
+  },
+  modalButton: {
+    flex: 1,
+    padding: 15,
+    marginBottom: 10,
+    marginHorizontal: 10,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    padding: 10,
+    bottom: 0,
+    height: windowHeight * 0.1,
+  },
+  buttonAdd: {
+    flex: 1,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00D1FF',
+  },
+  text: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 20,
   },
 });
 
