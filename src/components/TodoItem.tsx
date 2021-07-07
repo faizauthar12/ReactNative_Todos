@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00D1FF',
   },
   buttonText: {
-    paddingHorizontal: 10,
+    textAlign: 'center',
   },
 });
 
