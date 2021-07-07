@@ -61,7 +61,9 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
           item.toLowerCase().includes(search.toLowerCase()),
         )}
         */
-        data={todoItems}
+        data={todoItems.filter(item =>
+          item.title.toLowerCase().includes(search.toLowerCase()),
+        )}
         keyExtractor={todoItems => todoItems.id}
         renderItem={({item, index}) => (
           <TodoItem
@@ -73,9 +75,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
           />
         )}
       />
-      {/*
-      <BottomNavbar onPress={addTodoItem} />
-      */}
+      <BottomNavbar onModalPress={console.log} />
     </SafeAreaView>
   );
 };
