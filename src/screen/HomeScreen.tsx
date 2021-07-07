@@ -42,13 +42,16 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   const [todoItems, setTodoItems] = useState(TodoData);
   const [search, setSearch] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
 
-  /*
   // Add a new item to the state
-  function addTodoItem(_text: string) {
-    setTodoItems([...todoItems, _text]);
+  function addTodoItem(_title: string, _desc: string) {
+    setTodoItems([
+      ...todoItems,
+      {id: Math.floor(Math.random() * 10000), title: _title, desc: _desc},
+    ]);
   }
-  */
 
   // Function to delete an item from our array.
   function completeTodoItem(_id: number) {
@@ -111,10 +114,15 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
               marginTop: 10,
               marginHorizontal: 30,
             }}>
-            <TextInput placeholder={'Judul dari pekerjaanmu'}></TextInput>
             <TextInput
+              style={{color: 'black'}}
+              placeholder={'Judul dari pekerjaanmu'}
+              onChangeText={text => setTitle(text)}></TextInput>
+            <TextInput
+              style={{color: 'black'}}
               placeholder={'Deskripsikan pekerjaanmu'}
-              multiline></TextInput>
+              multiline
+              onChangeText={text => setDesc(text)}></TextInput>
           </View>
 
           <View style={{flexDirection: 'row'}}>
@@ -125,7 +133,10 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.modalButton, {backgroundColor: '#00D1FF'}]}
-              onPress={() => {}}>
+              onPress={() => {
+                addTodoItem(title, desc);
+                setModalVisible(false);
+              }}>
               <Text style={styles.text}>Tambah Todo</Text>
             </TouchableOpacity>
           </View>
