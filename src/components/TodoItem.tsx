@@ -9,29 +9,27 @@ export interface TodoItemProps {
   onPress(id: number): void;
 }
 
-const TodoItem = ({title, desc, navigation, index, onPress}: TodoItemProps) => {
-  return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => {
-        navigation.navigate('Detail', {title: title, desc: desc});
-      }}>
-      <View style={styles.firstLine}>
-        <Text numberOfLines={1} style={styles.textTitle}>
-          {title}
-        </Text>
-
-        <TouchableOpacity style={styles.Button} onPress={() => onPress(index)}>
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Text numberOfLines={2} style={styles.textDesc}>
-        {desc}
+const TodoItem = ({title, desc, navigation, index, onPress}: TodoItemProps) => (
+  <TouchableOpacity
+    style={styles.container}
+    onPress={() => {
+      navigation.navigate('Detail', {title: title, desc: desc});
+    }}>
+    <View style={styles.firstLine}>
+      <Text numberOfLines={1} style={styles.textTitle}>
+        {title}
       </Text>
-    </TouchableOpacity>
-  );
-};
+
+      <TouchableOpacity style={styles.Button} onPress={() => onPress(index)}>
+        <Text style={styles.buttonText}>X</Text>
+      </TouchableOpacity>
+    </View>
+
+    <Text numberOfLines={2} style={styles.textDesc}>
+      {desc}
+    </Text>
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   container: {
