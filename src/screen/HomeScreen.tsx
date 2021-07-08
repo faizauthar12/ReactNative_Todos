@@ -47,10 +47,15 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
 
   // Add a new item to the state
   function addTodoItem(_title: string, _desc: string) {
-    setTodoItems([
-      ...todoItems,
-      {id: Math.floor(Math.random() * 10000), title: _title, desc: _desc},
-    ]);
+    if (_title != '' && _desc != '') {
+      setTodoItems([
+        ...todoItems,
+        {id: Math.floor(Math.random() * 10000), title: _title, desc: _desc},
+      ]);
+      setTitle('');
+      setDesc('');
+      setModalVisible(false);
+    }
   }
 
   // Function to delete an item from our array.
@@ -135,7 +140,6 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
               style={[styles.modalButton, {backgroundColor: '#00D1FF'}]}
               onPress={() => {
                 addTodoItem(title, desc);
-                setModalVisible(false);
               }}>
               <Text style={styles.text}>Tambah Todo</Text>
             </TouchableOpacity>
