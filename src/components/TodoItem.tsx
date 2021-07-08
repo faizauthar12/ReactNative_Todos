@@ -4,16 +4,24 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 export interface TodoItemProps {
   title: string;
   desc: string;
+  date: string;
   navigation: any;
   index: number;
   onPress(id: number): void;
 }
 
-const TodoItem = ({title, desc, navigation, index, onPress}: TodoItemProps) => (
+const TodoItem = ({
+  title,
+  desc,
+  date,
+  navigation,
+  index,
+  onPress,
+}: TodoItemProps) => (
   <TouchableOpacity
     style={styles.container}
     onPress={() => {
-      navigation.navigate('Detail', {title: title, desc: desc});
+      navigation.navigate('Detail', {title: title, desc: desc, date: date});
     }}>
     <View style={styles.firstLine}>
       <Text numberOfLines={1} style={styles.textTitle}>
@@ -24,6 +32,8 @@ const TodoItem = ({title, desc, navigation, index, onPress}: TodoItemProps) => (
         <Text style={styles.buttonText}>X</Text>
       </TouchableOpacity>
     </View>
+
+    <Text>{date}</Text>
 
     <Text numberOfLines={2} style={styles.textDesc}>
       {desc}

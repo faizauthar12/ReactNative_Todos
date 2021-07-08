@@ -2,11 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
 const DetailScreen = ({route}) => {
-  const {title, desc} = route.params;
+  const {title, desc, date} = route.params;
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.textTitle}>{title}</Text>
+      <Text>{date}</Text>
       <Text style={styles.textDesc}>{desc}</Text>
     </SafeAreaView>
   );

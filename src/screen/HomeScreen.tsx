@@ -23,6 +23,7 @@ export interface IsTodo {
   id: number;
   title: string;
   desc: string;
+  date: string;
 }
 
 const TodoData: IsTodo[] = [
@@ -30,11 +31,13 @@ const TodoData: IsTodo[] = [
     id: 1,
     title: 'Pergi kepasar',
     desc: 'Beli sayuran dan buah',
+    date: '1/07/2021',
   },
   {
     id: 2,
     title: 'Berkebun',
     desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque ipsam praesentium aspernatur pariatur quos nam sed eius. Beatae rerum ab atque. Impedit eos incidunt rem magnam pariatur cum ratione ex.',
+    date: '1/07/2021',
   },
 ];
 
@@ -48,9 +51,18 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   // Add a new item to the state
   function addTodoItem(_title: string, _desc: string) {
     if (_title != '' && _desc != '') {
+      let date = new Date().getDate(); //Current Date
+      let month = new Date().getMonth() + 1; //Current Month
+      let year = new Date().getFullYear(); //Current Year
+
       setTodoItems([
         ...todoItems,
-        {id: Math.floor(Math.random() * 10000), title: _title, desc: _desc},
+        {
+          id: Math.floor(Math.random() * 10000),
+          title: _title,
+          desc: _desc,
+          date: date + '/' + month + '/' + year,
+        },
       ]);
       setTitle('');
       setDesc('');
@@ -89,6 +101,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
           <TodoItem
             title={item.title}
             desc={item.desc}
+            date={item.date}
             navigation={navigation}
             index={index}
             onPress={completeTodoItem}
