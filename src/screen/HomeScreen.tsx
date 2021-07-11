@@ -77,7 +77,6 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
     setTodoItems(tempArr);
   }
 
-  // TODO: Title, description, button delete, timestamp
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
