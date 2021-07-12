@@ -49,6 +49,8 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
 
+  const [disableButton, setDisableButton] = useState(false);
+
   useEffect(() => {
     getData();
   }, []);
@@ -123,6 +125,12 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
     }
   };
 
+  const onDelay = () => {
+    let delay = 5;
+    setDisableButton(true);
+    setTimeout(() => setDisableButton(false), delay * 1000);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -156,11 +164,14 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
 
       <View style={styles.bottomContainer}>
         <TouchableOpacity
+          disabled={disableButton}
           style={styles.buttonAdd}
           onPress={() => {
             setModalVisible(true);
           }}>
-          <Text style={styles.text}>Tambah Pekerjaan</Text>
+          <Text style={styles.text}>
+            {disableButton ? 'TIMEOUT' : 'Tambah Pekerjaan'}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -198,6 +209,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
               style={[styles.modalButton, {backgroundColor: '#00D1FF'}]}
               onPress={() => {
                 addTodoItem(title, desc);
+                onDelay();
               }}>
               <Text style={styles.text}>Tambah Todo</Text>
             </TouchableOpacity>
