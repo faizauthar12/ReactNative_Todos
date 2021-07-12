@@ -50,6 +50,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   const [desc, setDesc] = useState('');
 
   const [disableButton, setDisableButton] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(Number);
 
   useEffect(() => {
     getData();
@@ -128,8 +129,25 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
   const onDelay = () => {
     let delay = 5;
     setDisableButton(true);
+    setTimeLeft(delay);
     setTimeout(() => setDisableButton(false), delay * 1000);
   };
+
+  useEffect(() => {
+    // exit early when we reach 0
+    if (!timeLeft) return;
+
+    // save intervalId to clear the interval when the
+    // component re-renders
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+
+    // clear interval on re-render to avoid memory leaks
+    return () => clearInterval(intervalId);
+    // add timeLeft as a dependency to re-rerun the effect
+    // when we update it
+  }, [timeLeft]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -170,7 +188,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
             setModalVisible(true);
           }}>
           <Text style={styles.text}>
-            {disableButton ? 'TIMEOUT' : 'Tambah Pekerjaan'}
+            {disableButton ? timeLeft : 'Tambah Pekerjaan'}
           </Text>
         </TouchableOpacity>
       </View>
