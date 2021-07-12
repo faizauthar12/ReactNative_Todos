@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,6 +10,7 @@ import {
   Dimensions,
   TextInput,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import TodoListText from '../components/TodoListText';
 import TodoItem from '../components/TodoItem';
@@ -42,40 +43,85 @@ const TodoData: IsTodo[] = [
 ];
 
 const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
-  const [todoItems, setTodoItems] = useState(TodoData);
+  const [todoItems, setTodoItems] = useState<IsTodo[]>([]);
   const [search, setSearch] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
 
-  // Add a new item to the state
-  function addTodoItem(_title: string, _desc: string) {
-    if (_title != '' && _desc != '') {
-      let date = new Date().getDate(); //Current Date
-      let month = new Date().getMonth() + 1; //Current Month
-      let year = new Date().getFullYear(); //Current Year
+  useEffect(() => {
+    getData();
+  }, []);
 
-      setTodoItems([
-        ...todoItems,
-        {
-          id: Math.floor(Math.random() * 10000),
-          title: _title,
-          desc: _desc,
-          date: date + '/' + month + '/' + year,
-        },
-      ]);
-      setTitle('');
-      setDesc('');
-      setModalVisible(false);
+  // read asyncstorage
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storage_Key');
+      if (jsonValue) {
+        let tempJson = JSON.parse(jsonValue);
+        setTodoItems(tempJson);
+      }
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
+
+  // Add a new item to the state
+  const addTodoItem = async (_title: string, _desc: string) => {
+    if (_title != '' && _desc != '') {
+      try {
+        let date = new Date().getDate(); //Current Date
+        let month = new Date().getMonth() + 1; //Current Month
+        let year = new Date().getFullYear(); //Current Year
+
+        let tempArr = [
+          ...todoItems,
+          {
+            id: Math.floor(Math.random() * 10000),
+            title: _title,
+            desc: _desc,
+            date: date + '/' + month + '/' + year,
+          },
+        ];
+
+        setTodoItems(tempArr);
+        const jsonValue = JSON.stringify(tempArr);
+        await AsyncStorage.setItem('@storage_Key', jsonValue);
+
+        setTitle('');
+        setDesc('');
+        setModalVisible(false);
+
+        // debug
+        if (__DEV__) {
+          const currentData = await AsyncStorage.getItem('@storage_Key');
+          console.log(currentData);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
 
   // Function to delete an item from our array.
-  function completeTodoItem(_id: number) {
-    let tempArr = [...todoItems];
-    tempArr.splice(_id, 1);
-    setTodoItems(tempArr);
-  }
+  const completeTodoItem = async (_id: number) => {
+    try {
+      let tempArr = [...todoItems];
+      tempArr.splice(_id, 1);
+      setTodoItems(tempArr);
+
+      const jsonValue = JSON.stringify(tempArr);
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+
+      // debug
+      if (__DEV__) {
+        const currentData = await AsyncStorage.getItem('@storage_Key');
+        console.log(currentData);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -89,7 +135,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
         style={styles.listStyle}
         /*
         data={todoItems.filter(item =>
-          item.toLowerCase().includes(search.toLowerCase()),
+          item.title.toLowerCase().includes(search.toLowerCase()),
         )}
         */
         data={todoItems.filter(item =>
