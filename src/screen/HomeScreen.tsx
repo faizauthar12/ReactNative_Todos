@@ -71,7 +71,7 @@ const HomeScreen = ({navigation}: AuthNavProps<'Home'>) => {
 
   // Add a new item to the state
   const addTodoItem = async (_title: string, _desc: string) => {
-    if (_title != '' && _desc != '') {
+    if (_title && _desc) {
       try {
         let date = new Date().getDate(); //Current Date
         let month = new Date().getMonth() + 1; //Current Month
